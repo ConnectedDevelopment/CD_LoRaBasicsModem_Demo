@@ -59,7 +59,7 @@
 #include "sx126x_hal.h"
 #include "sx126x_hal_context.h"
 
-#include <logging/log.h>
+#include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(RadioHAL, CONFIG_LBM_LOG_LEVEL);
 
 /*

@@ -68,10 +68,10 @@
 #include "sx126x_hal_context.h"
 #include "modem_context.h"
 
-#include <kernel.h>
-#include <irq.h>
+#include <zephyr/kernel.h>
+#include <zephyr/irq.h>
 
-#include <logging/log.h>
+#include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(Main, CONFIG_LBM_LOG_LEVEL);
 
 /*

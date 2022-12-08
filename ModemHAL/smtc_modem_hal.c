@@ -63,8 +63,8 @@
 // for memcpy
 #include <string.h>
 
-#include <settings/settings.h>
-#include <drivers/gpio.h>
+#include <zephyr/settings/settings.h>
+#include <zephyr/drivers/gpio.h>
 #include <nrfx_gpiote.h>
 
 #include "ral_sx126x_bsp.h"
@@ -74,7 +74,7 @@
 #include "smtc_modem_hal_dbg_trace.h"
 #include "modem_context.h"
 
-#include <logging/log.h>
+#include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(ModemHAL, CONFIG_LBM_LOG_LEVEL);
 
 /*

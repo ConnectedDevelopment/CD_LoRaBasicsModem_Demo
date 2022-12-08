@@ -64,7 +64,7 @@
 #include "apps_modem_common_version.h"
 #include "smtc_modem_api_str.h"
 
-#include <logging/log.h>
+#include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(apps_modem_common, CONFIG_LBM_LOG_LEVEL);
 
 /*

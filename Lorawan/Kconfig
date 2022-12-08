@@ -12,5 +12,5 @@ config LOG_BUFFER_SIZE
 source "Kconfig.zephyr"
 
 menu "LoRa Basics Modem Options"
-   rsource "../LoraBasicsModem/Kconfig"
+   rsource "../LoRaBasicsModem_SWL2001/Kconfig"
 endmenu

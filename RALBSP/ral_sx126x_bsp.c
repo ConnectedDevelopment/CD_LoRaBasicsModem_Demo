@@ -59,7 +59,7 @@
 #include "ralf_sx126x.h"
 #include "sx126x_hal_context.h"
 
-#include <logging/log.h>
+#include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(RALBSP, CONFIG_LBM_LOG_LEVEL);
 
 /*

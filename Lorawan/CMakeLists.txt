@@ -19,39 +19,38 @@ target_sources(app PRIVATE
     Application/smtc_modem_api_str.c
 )
 
-#add_subdirectory(../LoraBasicsModem build_lbm)
-include(../LoraBasicsModem/CMakeLists.txt)
+include(../LoRaBasicsModem_SWL2001/CMakeLists.txt)
 
 target_include_directories(app PRIVATE
-    ../LoraBasicsModem
-    ../LoraBasicsModem/smtc_modem_api
-    ../LoraBasicsModem/smtc_modem_core
-    ../LoraBasicsModem/smtc_modem_core/device_management
-    ../LoraBasicsModem/smtc_modem_core/lorawan_api
-    ../LoraBasicsModem/smtc_modem_core/lr1mac
-    ../LoraBasicsModem/smtc_modem_core/lr1mac/src
-    ../LoraBasicsModem/smtc_modem_core/lr1mac/src/lr1mac_class_b
-    ../LoraBasicsModem/smtc_modem_core/lr1mac/src/lr1mac_class_c
-    ../LoraBasicsModem/smtc_modem_core/lr1mac/src/services
-    ../LoraBasicsModem/smtc_modem_core/lr1mac/src/smtc_real/src
-    ../LoraBasicsModem/smtc_modem_core/modem_config
-    ../LoraBasicsModem/smtc_modem_core/modem_core
-    ../LoraBasicsModem/smtc_modem_core/modem_services
-    ../LoraBasicsModem/smtc_modem_core/modem_supervisor
-    ../LoraBasicsModem/smtc_modem_core/radio_drivers/sx126x_driver/src
-    ../LoraBasicsModem/smtc_modem_core/radio_planner/src
-    ../LoraBasicsModem/smtc_modem_core/smtc_modem_crypto
-    ../LoraBasicsModem/smtc_modem_core/smtc_modem_crypto/smtc_secure_element
-    ../LoraBasicsModem/smtc_modem_core/smtc_modem_crypto/soft_secure_element
-    ../LoraBasicsModem/smtc_modem_core/smtc_modem_services
-    ../LoraBasicsModem/smtc_modem_core/smtc_modem_services/headers
-    ../LoraBasicsModem/smtc_modem_core/smtc_modem_services/src
-    ../LoraBasicsModem/smtc_modem_core/smtc_modem_services/src/alc_sync
-    ../LoraBasicsModem/smtc_modem_core/smtc_modem_services/src/file_upload
-    ../LoraBasicsModem/smtc_modem_core/smtc_modem_services/src/stream
-    ../LoraBasicsModem/smtc_modem_core/smtc_ral/src
-    ../LoraBasicsModem/smtc_modem_core/smtc_ralf/src
-    ../LoraBasicsModem/smtc_modem_hal
+    ../LoRaBasicsModem_SWL2001
+    ../LoRaBasicsModem_SWL2001/smtc_modem_api
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/device_management
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/lorawan_api
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/lr1mac
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/lr1mac/src
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/lr1mac/src/lr1mac_class_b
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/lr1mac/src/lr1mac_class_c
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/lr1mac/src/services
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/lr1mac/src/smtc_real/src
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/modem_config
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/modem_core
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/modem_services
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/modem_supervisor
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/radio_drivers/sx126x_driver/src
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/radio_planner/src
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_modem_crypto
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_modem_crypto/smtc_secure_element
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_modem_crypto/soft_secure_element
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_modem_services
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_modem_services/headers
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_modem_services/src
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_modem_services/src/alc_sync
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_modem_services/src/file_upload
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_modem_services/src/stream
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_ral/src
+    ../LoRaBasicsModem_SWL2001/smtc_modem_core/smtc_ralf/src
+    ../LoRaBasicsModem_SWL2001/smtc_modem_hal
     ../RadioDriverHAL
     ../RALBSP
     )
@@ -64,8 +63,6 @@ add_compile_definitions(
     ADD_SMTC_STREAM=yes
     CRYPTO=SOFT
     MIDDLEWARE=no
-#    MODEM_HAL_DBG_TRACE=0
-#    MODEM_HAL_DEEP_DBG_TRACE=0
     RP2_103
     SMTC_D2D
     SMTC_MULTICAST
