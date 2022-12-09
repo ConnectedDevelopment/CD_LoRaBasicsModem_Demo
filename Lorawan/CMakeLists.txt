@@ -55,7 +55,8 @@ target_include_directories(app PRIVATE
     ../RALBSP
     )
 
-add_compile_definitions(
+# Add compile definitions that are needed for LoRa Basics Modem.
+target_compile_definitions(app PRIVATE
     ADD_D2D=no
     ADD_MULTICAST=yes
     ADD_SMTC_ALC_SYNC=yes
@@ -71,3 +72,5 @@ add_compile_definitions(
     USER_DEFINED_JOIN_PARAMETERS
     )
 
+# Turn off string operation overflow warnings.
+target_compile_options(app PRIVATE -Wno-stringop-overflow)
