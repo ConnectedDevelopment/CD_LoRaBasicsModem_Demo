@@ -130,20 +130,20 @@ uint32_t apps_modem_common_get_gps_time(void)
    {
       case SMTC_MODEM_RC_OK:
       {
-         LOG_INF("Current UTC time: %d s\n", gps_time_s);
+         LOG_INF("Current UTC time: %d s", gps_time_s);
 
          break;
       }
 
       case SMTC_MODEM_RC_NO_TIME:
       {
-         LOG_WRN("No time available.\n");
+         LOG_WRN("No time available.");
          break;
       }
 
       default:
       {
-         LOG_ERR("Cannot get time from modem\n");
+         LOG_ERR("Cannot get time from modem");
          break;
       }
    }
@@ -170,19 +170,19 @@ uint32_t apps_modem_common_get_utc_time(void)
                                                         // latter is not implemented in the libraries used by Keil
 
          strftime(buf, TIME_BUFFER_SIZE, "%a %Y-%m-%d %H:%M:%S %Z", time);
-         LOG_INF("Current UTC time: %s\n", buf);
+         LOG_INF("Current UTC time: %s", buf);
          break;
       }
 
       case SMTC_MODEM_RC_NO_TIME:
       {
-         LOG_WRN("No time available.\n");
+         LOG_WRN("No time available.");
          break;
       }
 
       default:
       {
-         LOG_ERR("Cannot get time from modem\n");
+         LOG_ERR("Cannot get time from modem");
          break;
       }
    }
@@ -208,23 +208,23 @@ void apps_modem_common_configure_lorawan_params(uint8_t stack_id)
    rc = smtc_modem_set_deveui(stack_id, dev_eui);
    if (rc != SMTC_MODEM_RC_OK)
    {
-      LOG_ERR("smtc_modem_set_deveui failed: rc=%s (%d)\n", smtc_modem_return_code_to_str(rc), rc);
+      LOG_ERR("smtc_modem_set_deveui failed: rc=%s (%d)", smtc_modem_return_code_to_str(rc), rc);
    }
 
    rc = smtc_modem_set_joineui(stack_id, join_eui);
    if (rc != SMTC_MODEM_RC_OK)
    {
-      LOG_ERR("smtc_modem_set_joineui failed: rc=%s (%d)\n", smtc_modem_return_code_to_str(rc), rc);
+      LOG_ERR("smtc_modem_set_joineui failed: rc=%s (%d)", smtc_modem_return_code_to_str(rc), rc);
    }
 
    rc = smtc_modem_set_nwkkey(stack_id, app_key);
    if (rc != SMTC_MODEM_RC_OK)
    {
-      LOG_ERR("smtc_modem_set_nwkkey failed: rc=%s (%d)\n", smtc_modem_return_code_to_str(rc), rc);
+      LOG_ERR("smtc_modem_set_nwkkey failed: rc=%s (%d)", smtc_modem_return_code_to_str(rc), rc);
    }
 #endif
 
-   LOG_INF("LoRaWAN parameters:\n");
+   LOG_INF("LoRaWAN parameters:");
 
    rc = smtc_modem_get_deveui(stack_id, dev_eui);
    if (rc == SMTC_MODEM_RC_OK)
@@ -233,7 +233,7 @@ void apps_modem_common_configure_lorawan_params(uint8_t stack_id)
    }
    else
    {
-      LOG_ERR("smtc_modem_get_deveui failed: rc=%s (%d)\n", smtc_modem_return_code_to_str(rc), rc);
+      LOG_ERR("smtc_modem_get_deveui failed: rc=%s (%d)", smtc_modem_return_code_to_str(rc), rc);
    }
 
    rc = smtc_modem_get_joineui(stack_id, join_eui);
@@ -243,7 +243,7 @@ void apps_modem_common_configure_lorawan_params(uint8_t stack_id)
    }
    else
    {
-      LOG_ERR("smtc_modem_get_joineui failed: rc=%s (%d)\n", smtc_modem_return_code_to_str(rc), rc);
+      LOG_ERR("smtc_modem_get_joineui failed: rc=%s (%d)", smtc_modem_return_code_to_str(rc), rc);
    }
 
 #ifdef LR11XX_DEFINED_JOIN_PARAMETERS
@@ -258,7 +258,7 @@ void apps_modem_common_configure_lorawan_params(uint8_t stack_id)
    }
    else
    {
-      LOG_ERR("smtc_modem_get_chip_eui failed: rc=%s (%d)\n", smtc_modem_return_code_to_str(rc), rc);
+      LOG_ERR("smtc_modem_get_chip_eui failed: rc=%s (%d)", smtc_modem_return_code_to_str(rc), rc);
    }
 
    rc = smtc_modem_get_pin(stack_id, pin);
@@ -268,14 +268,14 @@ void apps_modem_common_configure_lorawan_params(uint8_t stack_id)
    }
    else
    {
-      LOG_ERR("smtc_modem_get_pin failed: rc=%s (%d)\n", smtc_modem_return_code_to_str(rc), rc);
+      LOG_ERR("smtc_modem_get_pin failed: rc=%s (%d)", smtc_modem_return_code_to_str(rc), rc);
    }
 #endif
 
    rc = smtc_modem_set_class(stack_id, LORAWAN_CLASS);
    if (rc != SMTC_MODEM_RC_OK)
    {
-      LOG_ERR("smtc_modem_set_class failed: rc=%s (%d)\n", smtc_modem_return_code_to_str(rc), rc);
+      LOG_ERR("smtc_modem_set_class failed: rc=%s (%d)", smtc_modem_return_code_to_str(rc), rc);
    }
 
    modem_class_to_string(LORAWAN_CLASS);
@@ -283,7 +283,7 @@ void apps_modem_common_configure_lorawan_params(uint8_t stack_id)
    rc = smtc_modem_set_region(stack_id, LORAWAN_REGION);
    if (rc != SMTC_MODEM_RC_OK)
    {
-      LOG_ERR("smtc_modem_set_region failed: rc=%s (%d)\n", smtc_modem_return_code_to_str(rc), rc);
+      LOG_ERR("smtc_modem_set_region failed: rc=%s (%d)", smtc_modem_return_code_to_str(rc), rc);
    }
 
    modem_region_to_string(LORAWAN_REGION);
@@ -307,21 +307,21 @@ void apps_modem_common_display_lbm_version(void)
    modem_response_code = smtc_modem_get_lorawan_version(&lorawan_version);
    if (modem_response_code == SMTC_MODEM_RC_OK)
    {
-      LOG_INF("LoRaWAN version: %.2x.%.2x.%.2x.%.2x\n", lorawan_version.major, lorawan_version.minor,
+      LOG_INF("LoRaWAN version: %.2x.%.2x.%.2x.%.2x", lorawan_version.major, lorawan_version.minor,
               lorawan_version.patch, lorawan_version.revision);
    }
 
    modem_response_code = smtc_modem_get_modem_version(&firmware_version);
    if (modem_response_code == SMTC_MODEM_RC_OK)
    {
-      LOG_INF("LoRa Basics Modem version: %.2x.%.2x.%.2x\n", firmware_version.major,
+      LOG_INF("LoRa Basics Modem version: %.2x.%.2x.%.2x", firmware_version.major,
               firmware_version.minor, firmware_version.patch);
    }
 }
 
 void apps_modem_commom_display_sdk_version(void)
 {
-   LOG_INF("SDK version: %s\n", apps_modem_common_sdk_version);
+   LOG_INF("SDK version: %s", apps_modem_common_sdk_version);
 }
 
 /*

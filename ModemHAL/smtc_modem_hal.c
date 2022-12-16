@@ -65,6 +65,7 @@
 
 #include <zephyr/settings/settings.h>
 #include <zephyr/drivers/gpio.h>
+#include <zephyr/drivers/sensor.h>
 #include <nrfx_gpiote.h>
 
 #include "ral_sx126x_bsp.h"
@@ -140,6 +141,8 @@ static K_WORK_DEFINE(halTimerWorkItem, HalTimerWorkHandler);
 
 static void HalDio1WorkHandler(struct k_work *work);
 static K_WORK_DEFINE(halDio1WorkItem, HalDio1WorkHandler);
+
+static void TemperatureGet(struct sensor_value *temperature);
 
 
 /*
@@ -669,6 +672,7 @@ uint32_t smtc_modem_hal_get_radio_tcxo_startup_delay_ms(void)
 
 /**
  * @brief Return the battery level.
+ *    A value between 0 (for 0%) and 255 (for 100%).
  *
  * @return uint8_t Battery level for lorawan stack.
  */
@@ -686,15 +690,29 @@ uint8_t smtc_modem_hal_get_battery_level(void)
  */
 int8_t smtc_modem_hal_get_temperature(void)
 {
-   int8_t tempC = 25;
+   int8_t tempC;
+   struct sensor_value temperature;
+
+   TemperatureGet(&temperature);
+
+   tempC = (int8_t) temperature.val1;
+
+   // Round up?
+   if (temperature.val2 >= 500000)
+   {
+      tempC += 1;
+   }
+
    LOG_DBG("Temperature: %d C", tempC);
+
    return tempC;
 }
 
 /**
  * @brief Return mcu voltage (can be needed for dm uplink payload).
+ *    Indicates the current battery voltage.
  *
- * @return uint8_t MCU voltage.
+ * @return uint8_t MCU voltage, in units of 20mV.
  */
 uint8_t smtc_modem_hal_get_voltage(void)
 {
@@ -862,5 +880,28 @@ static void HalTimerHandler(struct k_timer *timer)
          k_work_submit(&halTimerWorkItem);
       }
    }
+}
+
+#define DEFAULT_TEMPERATURE            25
+
+static const struct device *const device = DEVICE_DT_GET(DT_NODELABEL(temp));
+
+static void TemperatureGet(struct sensor_value *temperature)
+{
+   struct sensor_value val = {DEFAULT_TEMPERATURE, 0};
+
+   int err = sensor_sample_fetch(device);
+   if (!err)
+   {
+      // Get the device die temperature in degrees Celsius.
+      err = sensor_channel_get(device, SENSOR_CHAN_DIE_TEMP, &val);
+      if (!err)
+      {
+         *temperature = val;
+
+         LOG_INF("Device temperature: %d.%06d C", val.val1, val.val2);
+      }
+   }
+
 }
 

@@ -197,10 +197,6 @@ int main(void)
    /* Disable IRQ to avoid unwanted behaviour during init */
    key = irq_lock();
 
-   /* Init board and peripherals */
-//   hal_mcu_init();
-//   smtc_board_init_periph();
-
    /* Init the Lora Basics Modem event callbacks */
    apps_modem_event_init(&smtc_event_callback);
 
@@ -214,6 +210,8 @@ int main(void)
    LOG_INF("###### ===== LoRa Basics Modem LoRaWAN Class A/C demo application ==== ######");
    LOG_INF("Version 1.0  Build: %s %s", __DATE__, __TIME__);
    apps_modem_common_display_version_information();
+
+   LOG_INF("Device temperature: %d", smtc_modem_hal_get_temperature());
 
    while (1)
    {
@@ -292,9 +290,6 @@ static void on_modem_down_data(int8_t rssi, int8_t snr, smtc_modem_event_downdat
 {
    LOG_INF("Downlink received:");
    LOG_INF("  - LoRaWAN Fport = %d", port);
-   LOG_INF("  - Payload size  = %d", size);
-   LOG_INF("  - RSSI          = %d dBm", rssi - 64);
-   LOG_INF("  - SNR           = %d dB", snr >> 2);
 
    switch (rx_window)
    {
@@ -314,9 +309,13 @@ static void on_modem_down_data(int8_t rssi, int8_t snr, smtc_modem_event_downdat
       }
    }
 
+   LOG_INF("  - RSSI          = %d dBm", rssi - 64);
+   LOG_INF("  - SNR           = %d dB", snr >> 2);
+   LOG_INF("  - Payload size  = %d", size);
+
    if (size != 0)
    {
-      LOG_HEXDUMP_DBG(payload, size, "Payload");
+      LOG_HEXDUMP_INF(payload, size, "  - Payload:");
    }
 }
 
@@ -342,6 +341,11 @@ static void send_frame(const uint8_t *buffer, const uint8_t length, bool tx_conf
    else
    {
       LOG_INF("Request uplink");
+      if (length != 0)
+      {
+         LOG_HEXDUMP_INF(buffer, length, "  - Payload:");
+      }
+
       ASSERT_SMTC_MODEM_RC(smtc_modem_request_uplink(stack_id, LORAWAN_APP_PORT, tx_confirmed, buffer, length));
    }
 }

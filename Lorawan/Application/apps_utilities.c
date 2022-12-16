@@ -98,7 +98,7 @@ LOG_MODULE_REGISTER(apps_utilities, CONFIG_LBM_LOG_LEVEL);
 
 void modem_status_to_string(smtc_modem_status_mask_t modem_status)
 {
-   LOG_INF("Modem status: ");
+   LOG_INF("Modem status (0x%02X):", modem_status);
 
    if ((modem_status & SMTC_MODEM_STATUS_BROWNOUT) == SMTC_MODEM_STATUS_BROWNOUT)
    {
@@ -132,8 +132,6 @@ void modem_status_to_string(smtc_modem_status_mask_t modem_status)
    {
       LOG_INF("STREAM ");
    }
-
-   LOG_INF("\r\n\r\n");
 }
 
 void modem_class_to_string(smtc_modem_class_t lorawan_class)
@@ -144,13 +142,13 @@ void modem_class_to_string(smtc_modem_class_t lorawan_class)
       case SMTC_MODEM_CLASS_B:
       case SMTC_MODEM_CLASS_C:
       {
-         LOG_INF("Class: %s\n", smtc_modem_class_to_str(lorawan_class));
+         LOG_INF("Class: %s", smtc_modem_class_to_str(lorawan_class));
          break;
       }
 
       default:
       {
-         LOG_WRN("Unknown Class\n\n");
+         LOG_WRN("Unknown Class\n");
       }
    }
 }
@@ -172,13 +170,13 @@ void modem_region_to_string(smtc_modem_region_t region)
       case SMTC_MODEM_REGION_RU_864:
       case SMTC_MODEM_REGION_CN_470_RP_1_0:
       {
-         LOG_INF("Region: %s\n\n", smtc_modem_region_to_str(region));
+         LOG_INF("Region: %s\n", smtc_modem_region_to_str(region));
          break;
       }
 
       default:
       {
-         LOG_WRN("Unknown Region\n\n");
+         LOG_WRN("Unknown Region\n");
       }
    }
 }
