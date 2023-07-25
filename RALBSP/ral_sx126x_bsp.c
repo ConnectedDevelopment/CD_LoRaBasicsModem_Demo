@@ -497,17 +497,30 @@ void ral_sx126x_bsp_get_tx_cfg(const void *context, const ral_sx126x_bsp_tx_cfg_
 /**
  * Get the XOSC configuration.
  *
- * @remark If no TCXO is present, this function should set tcxoIsRadioControlled to false, and return.
+ * @remark If no TCXO is present, this function should set xosc_cfg to RAL_XOSC_CFG_XTAL, and return.
  *
  * @param [in] context Chip implementation context.
- * @param [out] tcxoIsRadioControlled Let the caller know if there is a radio-controlled TCXO.
- * @param [out] supplyVoltage TCXO supply voltage parameter.
- * @param [out] startupTimeInTick TCXO setup time in clock tick.
+ * @param [out] xosc_cfg Let the caller know what kind of XOSC is used.
+ * @param [out] supply_voltage TCXO supply voltage parameter.
+ * @param [out] startup_time_in_tick TCXO setup time in clock tick.
  */
-void ral_sx126x_bsp_get_xosc_cfg(const void *context, bool *tcxoIsRadioControlled,
-                                 sx126x_tcxo_ctrl_voltages_t *supplyVoltage, uint32_t *startupTimeInTick)
+void ral_sx126x_bsp_get_xosc_cfg( const void* context, ral_xosc_cfg_t* xosc_cfg,
+                                  sx126x_tcxo_ctrl_voltages_t* supply_voltage, uint32_t* startup_time_in_tick )
 {
-   *tcxoIsRadioControlled = false;
+    // No tcxo on Basic Modem sx1261,sx1262 or sx1268 reference boards.
+    *xosc_cfg = RAL_XOSC_CFG_XTAL;
+}
+
+/**
+ * Get the trimming capacitor values.
+ *
+ * @param [in] context Chip implementation context.
+ * @param [out] trimming_cap_xta Value for the trimming capacitor connected to XTA pin.
+ * @param [out] trimming_cap_xtb Value for the trimming capacitor connected to XTB pin.
+ */
+void ral_sx126x_bsp_get_trim_cap( const void* context, uint8_t* trimming_cap_xta, uint8_t* trimming_cap_xtb )
+{
+   // Do nothing, let the driver choose the default values.
 }
 
 /**

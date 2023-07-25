@@ -9,8 +9,10 @@ config LOG_BUFFER_SIZE
    int
    default 10240 if LBM_LOG_LEVEL_DBG || SPI_LOG_LEVEL_DBG || LBM_HAL_DBG_DEEP
 
-source "Kconfig.zephyr"
-
 menu "LoRa Basics Modem Options"
    rsource "../LoRaBasicsModem_SWL2001/Kconfig"
+endmenu
+
+menu "Zephyr Kernel"
+   source "Kconfig.zephyr"
 endmenu

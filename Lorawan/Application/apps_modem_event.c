@@ -118,7 +118,7 @@ void apps_modem_event_process(void)
             switch (current_event.event_type)
             {
                case SMTC_MODEM_EVENT_RESET:
-                  LOG_INF("###### ===== BASICS MODEM RESET EVENT ==== ######\n");
+                  LOG_INF("###### ===== BASICS MODEM RESET EVENT ==== ######");
                   LOG_INF("Reset count : %u \n", current_event.event_data.reset.count);
                   if (apps_modem_event_callback->reset != NULL)
                   {
@@ -151,7 +151,7 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_TXDONE:
-                  LOG_INF("###### ===== TX DONE EVENT ==== ######\n");
+                  LOG_INF("###### ===== TX DONE EVENT ==== ######");
                   switch (current_event.event_data.txdone.status)
                   {
                      case SMTC_MODEM_EVENT_TXDONE_NOT_SENT:
@@ -173,11 +173,11 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_DOWNDATA:
-                  LOG_INF("###### ===== DOWNLINK EVENT ==== ######\n");
-                  LOG_INF("Rx window: %s\n", smtc_modem_event_downdata_window_to_str(
+                  LOG_INF("###### ===== DOWNLINK EVENT ==== ######");
+                  LOG_INF("Rx window: %s", smtc_modem_event_downdata_window_to_str(
                              current_event.event_data.downdata.window));
-                  LOG_INF("Rx port: %d\n", current_event.event_data.downdata.fport);
-                  LOG_INF("Rx RSSI: %d\n", current_event.event_data.downdata.rssi - 64);
+                  LOG_INF("Rx port: %d", current_event.event_data.downdata.fport);
+                  LOG_INF("Rx RSSI: %d", current_event.event_data.downdata.rssi - 64);
                   LOG_INF("Rx SNR: %d\n", current_event.event_data.downdata.snr / 4);
 
                   if (apps_modem_event_callback->down_data != NULL)
@@ -190,7 +190,7 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_UPLOADDONE:
-                  LOG_INF("###### ===== UPLOAD DONE EVENT ==== ######\n");
+                  LOG_INF("###### ===== UPLOAD DONE EVENT ==== ######");
                   LOG_INF("Upload status: %s\n", smtc_modem_event_uploaddone_status_to_str(
                              current_event.event_data.uploaddone.status));
                   if (apps_modem_event_callback->upload_done != NULL)
@@ -200,8 +200,8 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_SETCONF:
-                  LOG_INF("###### ===== SET CONF EVENT ==== ######\n");
-                  LOG_INF("Tag: %s",
+                  LOG_INF("###### ===== SET CONF EVENT ==== ######");
+                  LOG_INF("Tag: %s\n",
                           smtc_modem_event_setconf_tag_to_str(current_event.event_data.setconf.tag));
                   if (apps_modem_event_callback->set_conf != NULL)
                   {
@@ -210,7 +210,7 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_MUTE:
-                  LOG_INF("###### ===== MUTE EVENT ==== ######\n");
+                  LOG_INF("###### ===== MUTE EVENT ==== ######");
                   LOG_INF("Mute: %s\n",
                           smtc_modem_event_mute_status_to_str(current_event.event_data.mute.status));
                   if (apps_modem_event_callback->mute != NULL)
@@ -228,7 +228,7 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_TIME:
-                  LOG_INF("###### ===== TIME EVENT ==== ######\n");
+                  LOG_INF("###### ===== TIME EVENT ==== ######");
                   LOG_INF("Time: %s\n",
                           smtc_modem_event_time_status_to_str(current_event.event_data.time.status));
                   if (apps_modem_event_callback->time_updated_alc_sync != NULL)
@@ -254,10 +254,10 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_LINK_CHECK:
-                  LOG_INF("###### ===== LINK CHECK EVENT ==== ######\n");
-                  LOG_INF("Link status: %s\n", smtc_modem_event_link_check_status_to_str(
+                  LOG_INF("###### ===== LINK CHECK EVENT ==== ######");
+                  LOG_INF("Link status: %s", smtc_modem_event_link_check_status_to_str(
                              current_event.event_data.link_check.status));
-                  LOG_INF("Margin: %d dB\n", current_event.event_data.link_check.margin);
+                  LOG_INF("Margin: %d dB", current_event.event_data.link_check.margin);
                   LOG_INF("Number of gateways: %d\n", current_event.event_data.link_check.gw_cnt);
                   if (apps_modem_event_callback->link_status != NULL)
                   {
@@ -268,7 +268,7 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_ALMANAC_UPDATE:
-                  LOG_INF("###### ===== ALMANAC UPDATE EVENT ==== ######\n");
+                  LOG_INF("###### ===== ALMANAC UPDATE EVENT ==== ######");
                   LOG_INF("Almanac update status: %s\n",
                           smtc_modem_event_almanac_update_status_to_str(
                              current_event.event_data.almanac_update.status));
@@ -289,7 +289,7 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_CLASS_B_PING_SLOT_INFO:
-                  LOG_INF("###### ===== CLASS B PING SLOT INFO EVENT ==== ######\n");
+                  LOG_INF("###### ===== CLASS B PING SLOT INFO EVENT ==== ######");
                   LOG_INF("Class B ping slot status: %s\n",
                           smtc_modem_event_class_b_ping_slot_status_to_str(
                              current_event.event_data.class_b_ping_slot_info.status));
@@ -301,7 +301,7 @@ void apps_modem_event_process(void)
                   break;
 
                case SMTC_MODEM_EVENT_CLASS_B_STATUS:
-                  LOG_INF("###### ===== CLASS B STATUS EVENT ==== ######\n");
+                  LOG_INF("###### ===== CLASS B STATUS EVENT ==== ######");
                   LOG_INF(
                      "Class B status: %s\n",
                      smtc_modem_event_class_b_status_to_str(current_event.event_data.class_b_status.status));
@@ -348,12 +348,12 @@ void apps_modem_event_process(void)
          }
          else
          {
-            LOG_ERR("lora_basics_modem_event_callback not defined %u\n", current_event.event_type);
+            LOG_ERR("lora_basics_modem_event_callback not defined %u", current_event.event_type);
          }
       }
       else
       {
-         LOG_ERR("smtc_modem_get_event != SMTC_MODEM_RC_OK\n");
+         LOG_ERR("smtc_modem_get_event != SMTC_MODEM_RC_OK");
       }
    } while ((return_code == SMTC_MODEM_RC_OK) && (current_event.event_type != SMTC_MODEM_EVENT_NONE));
 }

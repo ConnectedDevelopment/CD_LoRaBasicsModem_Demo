@@ -25,7 +25,8 @@
 	lora: sx1262@0 {
 		compatible = "semtech,sx1262";
 		reg = <0x0>;
-		label = "sx1262";
+		/* "label" is deprecated */
+		/* label = "sx1262"; */
 		spi-max-frequency = <3000000>;
 
 		/* Enable SX126x DIO2 output to drive RF switch. */
